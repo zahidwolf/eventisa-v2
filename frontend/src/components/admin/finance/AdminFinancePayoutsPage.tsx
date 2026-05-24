@@ -176,7 +176,7 @@ export function AdminFinancePayoutsPage() {
         <MarkPaidModal
           open={!!paidId}
           onOpenChange={(o) => !o && setPaidId(null)}
-          organizerName={paidTarget.organizerName}
+          organizerName={paidTarget.organizerName!}
           netAmount={paidTarget.netAmount}
           loading={paidMut.isPending}
           onConfirm={(body) => paidId && paidMut.mutate({ id: paidId, body })}
