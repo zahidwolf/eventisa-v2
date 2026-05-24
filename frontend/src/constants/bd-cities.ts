@@ -1,0 +1,16 @@
+export const BD_CITIES = [
+  "Dhaka",
+  "Chattogram",
+  "Sylhet",
+  "Rajshahi",
+  "Khulna",
+  "Barishal",
+  "Rangpur",
+  "Mymensingh",
+  "Cox's Bazar",
+  "Gazipur",
+  "Narayanganj",
+  "Comilla",
+  "Jessore",
+  "Bogura",
+];

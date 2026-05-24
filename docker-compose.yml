@@ -1,0 +1,38 @@
+# Local MongoDB as a single-node replica set (required for Mongoose transactions).
+# Start:  docker compose up -d
+# Init:   docker compose up mongo-init
+# Stop:   docker compose down
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: tick-mongo
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  mongo-init:
+    image: mongo:7
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    restart: "on-failure"
+    entrypoint:
+      - mongosh
+      - --host
+      - mongodb:27017
+      - --file
+      - /scripts/init-mongo-replica-set-docker.js
+    volumes:
+      - ./scripts/init-mongo-replica-set-docker.js:/scripts/init-mongo-replica-set-docker.js:ro
+
+volumes:
+  mongodb_data:

@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+    --card: 225 35% 14%;
+    --card-foreground: 210 40% 98%;
+    --primary: 330 100% 62%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 225 32% 12%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 225 25% 18%;
+    --muted-foreground: 215 16% 57%;
+    --accent: 262 100% 68%;
+    --destructive: 0 84% 60%;
+    --border: 225 25% 20%;
+    --input: 225 25% 20%;
+    --ring: 330 100% 62%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface text-foreground antialiased;
+    background-color: #12121e;
+  }
+}
+
+@layer utilities {
+  .text-gradient-luxury {
+    @apply bg-gradient-to-r from-[#FF3EA5] via-white to-[#9B5CFF] bg-clip-text text-transparent;
+  }
+
+  .glass-panel {
+    @apply border border-white/[0.08] bg-surface-glass/80 backdrop-blur-xl;
+  }
+
+  .card-lift {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:border-white/15;
+  }
+
+  .glow-hover {
+    @apply transition-shadow duration-300 hover:shadow-glow-pink;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  @keyframes organizer-ticker {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .organizer-ticker-track {
+    animation: organizer-ticker 30s linear infinite;
+    will-change: transform;
+  }
+
+  .organizer-ticker-track:hover {
+    animation-play-state: paused;
+  }
+
+  .organizer-ticker-mask {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 3%,
+      black 97%,
+      transparent
+    );
+    mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  }
+
+  .organizer-showcase-glass {
+    @apply relative overflow-hidden rounded-3xl border border-white/[0.12] bg-surface-glass/50 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06),0_24px_48px_-12px_rgba(0,0,0,0.45)] backdrop-blur-2xl;
+  }
+
+  @keyframes nav-dropdown-in {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .nav-dropdown-panel {
+    animation: nav-dropdown-in 0.18s ease-out;
+  }
+
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    .ticket-print-area,
+    .ticket-print-area * {
+      visibility: visible;
+    }
+    .ticket-print-area {
+      position: fixed;
+      inset: 0;
+      margin: auto;
+      max-height: none;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  }
+}

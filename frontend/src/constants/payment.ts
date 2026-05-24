@@ -1,0 +1,1 @@
+export const MOCK_SIMULATION_DELAY_MS = 2000;
